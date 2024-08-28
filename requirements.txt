@@ -1,0 +1,9 @@
+#Generated with pipreqs
+captum==0.6.0
+imbalanced_learn==0.12.2
+joblib==1.4.0
+matplotlib==3.8.4
+numpy==2.1.0
+pandas==2.2.2
+scikit_learn==1.4.2
+torch==2.2.2
