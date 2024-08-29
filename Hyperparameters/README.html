@@ -397,9 +397,8 @@ class.</li>
 <li><em>SMOTE_random:</em> Synthetic Minority Over-sampling Technique
 (SMOTE) method for over-sampling implemented with the <a href="https://imbalanced-learn.org/stable/references/generated/imblearn.over_sampling.SMOTE.html">imblearn.over_sampling.SMOTE</a>
 class, and combined with the random under-sampling.</li>
-<li><em>SMOTE_ENN:</em> Synthetic Minority Over-sampling Technique
-(SMOTE) method for over-sampling implemented with the <a href="https://imbalanced-learn.org/stable/references/generated/imblearn.over_sampling.SMOTE.html">imblearn.over_sampling.SMOTE</a>
-class, and combined with the ENN under-sampling.</li>
+<li><em>SMOTE_ENN:</em> SMOTE method for over-sampling combined with the
+ENN under-sampling.</li>
 </ul></li>
 </ul>
 <hr />
@@ -410,8 +409,12 @@ class, and combined with the ENN under-sampling.</li>
 <div id="lr" class="section level4">
 <h4>LR</h4>
 <ul>
-<li><strong>solver:</strong> newton-cg,liblinear,sag,saga</li>
-<li><strong>creg:</strong> 0.0001,0.001,0.01,1,10,100</li>
+<li><strong>solver:</strong> Algorithm to use in the optimization
+problem corresponding to the <em>‘solver’</em> parameter in the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html">sklearn.linear_model.LogisticRegression</a>
+class.</li>
+<li><strong>creg:</strong> Inverse of regularization strength
+corresponding to the <em>‘C’</em> parameter in the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html">sklearn.linear_model.LogisticRegression</a>
+class.</li>
 <li><strong>balance:</strong> Balancing of cases and controls is
 specified as the percentage of controls relative to the total number of
 cases and controls.(Ex. a value of 60 indicates that 60% of the samples
@@ -427,20 +430,31 @@ class.</li>
 <li><em>SMOTE_random:</em> Synthetic Minority Over-sampling Technique
 (SMOTE) method for over-sampling implemented with the <a href="https://imbalanced-learn.org/stable/references/generated/imblearn.over_sampling.SMOTE.html">imblearn.over_sampling.SMOTE</a>
 class, and combined with the random under-sampling.</li>
-<li><em>SMOTE_ENN:</em> Synthetic Minority Over-sampling Technique
-(SMOTE) method for over-sampling implemented with the <a href="https://imbalanced-learn.org/stable/references/generated/imblearn.over_sampling.SMOTE.html">imblearn.over_sampling.SMOTE</a>
-class, and combined with the ENN under-sampling.</li>
+<li><em>SMOTE_ENN:</em> SMOTE method for over-sampling combined with the
+ENN under-sampling.</li>
 </ul></li>
 </ul>
 </div>
 <div id="gb" class="section level4">
 <h4>GB</h4>
 <ul>
-<li><strong>n_estimators:</strong> 70,80,90</li>
-<li><strong>learning_rate:</strong> 0.001,0.01,0.1</li>
-<li><strong>subsample:</strong> 1.0</li>
-<li><strong>max_depth:</strong> 7,10,12</li>
-<li><strong>loss:</strong> exponential</li>
+<li><strong>n_estimators:</strong> The number of boosting stages to
+perform corresponding to the <em>‘n_estimators’</em> parameter in the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html">sklearn.ensemble.GradientBoostingClassifier</a>
+class.</li>
+<li><strong>learning_rate:</strong> Learning rate corresponding to the
+<em>‘learning_rate’</em> parameter in the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html">sklearn.ensemble.GradientBoostingClassifier</a>
+class.</li>
+<li><strong>subsample:</strong> The fraction of samples to be used for
+fitting the individual base learners corresponding to the
+<em>‘subsample’</em> parameter in the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html">sklearn.ensemble.GradientBoostingClassifier</a>
+class.</li>
+<li><strong>max_depth:</strong> Maximum depth of the individual
+regression estimators corresponding to the <em>‘max_depth’</em>
+parameter in the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html">sklearn.ensemble.GradientBoostingClassifier</a>
+class.</li>
+<li><strong>loss:</strong> The loss function to be optimized
+corresponding to the <em>‘loss’</em> parameter in the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html">sklearn.ensemble.GradientBoostingClassifier</a>
+class.</li>
 <li><strong>balance:</strong> Balancing of cases and controls is
 specified as the percentage of controls relative to the total number of
 cases and controls.(Ex. a value of 60 indicates that 60% of the samples
@@ -456,19 +470,32 @@ class.</li>
 <li><em>SMOTE_random:</em> Synthetic Minority Over-sampling Technique
 (SMOTE) method for over-sampling implemented with the <a href="https://imbalanced-learn.org/stable/references/generated/imblearn.over_sampling.SMOTE.html">imblearn.over_sampling.SMOTE</a>
 class, and combined with the random under-sampling.</li>
-<li><em>SMOTE_ENN:</em> Synthetic Minority Over-sampling Technique
-(SMOTE) method for over-sampling implemented with the <a href="https://imbalanced-learn.org/stable/references/generated/imblearn.over_sampling.SMOTE.html">imblearn.over_sampling.SMOTE</a>
-class, and combined with the ENN under-sampling.</li>
+<li><em>SMOTE_ENN:</em> SMOTE method for over-sampling combined with the
+ENN under-sampling.</li>
 </ul></li>
 </ul>
 </div>
 <div id="et-and-rf" class="section level4">
 <h4>ET and RF</h4>
 <ul>
-<li><strong>n_estimators:</strong> 50,60,70,80,100</li>
-<li><strong>min_samples_split:</strong> 2,5,8</li>
-<li><strong>min_samples_leaf:</strong> 1,2,5</li>
-<li><strong>max_depth:</strong> None</li>
+<li><strong>n_estimators:</strong> The number of trees in the forest
+corresponding to the <em>‘n_estimators’</em> parameter in the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.ExtraTreesClassifier.html">sklearn.ensemble.ExtraTreesClassifier</a>
+and <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html">sklearn.ensemble.RandomForestClassifier</a>
+classes.</li>
+<li><strong>min_samples_split:</strong> The minimum number of samples
+required to split an internal node corresponding to the
+<em>‘min_samples_split’</em> parameter in the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.ExtraTreesClassifier.html">sklearn.ensemble.ExtraTreesClassifier</a>
+and <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html">sklearn.ensemble.RandomForestClassifier</a>
+classes.</li>
+<li><strong>min_samples_leaf:</strong> The minimum number of samples
+required to be at a leaf node corresponding to the
+<em>‘min_samples_split’</em> parameter in the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.ExtraTreesClassifier.html">sklearn.ensemble.ExtraTreesClassifier</a>
+and <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html">sklearn.ensemble.RandomForestClassifier</a>
+classes.</li>
+<li><strong>max_depth:</strong> The maximum depth of the tree
+corresponding to the <em>‘max_depth’</em> parameter in the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.ExtraTreesClassifier.html">sklearn.ensemble.ExtraTreesClassifier</a>
+and <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html">sklearn.ensemble.RandomForestClassifier</a>
+classes.</li>
 <li><strong>balance:</strong> Balancing of cases and controls is
 specified as the percentage of controls relative to the total number of
 cases and controls.(Ex. a value of 60 indicates that 60% of the samples
@@ -484,9 +511,8 @@ class.</li>
 <li><em>SMOTE_random:</em> Synthetic Minority Over-sampling Technique
 (SMOTE) method for over-sampling implemented with the <a href="https://imbalanced-learn.org/stable/references/generated/imblearn.over_sampling.SMOTE.html">imblearn.over_sampling.SMOTE</a>
 class, and combined with the random under-sampling.</li>
-<li><em>SMOTE_ENN:</em> Synthetic Minority Over-sampling Technique
-(SMOTE) method for over-sampling implemented with the <a href="https://imbalanced-learn.org/stable/references/generated/imblearn.over_sampling.SMOTE.html">imblearn.over_sampling.SMOTE</a>
-class, and combined with the ENN under-sampling.</li>
+<li><em>SMOTE_ENN:</em> SMOTE method for over-sampling combined with the
+ENN under-sampling.</li>
 </ul></li>
 </ul>
 </div>
