@@ -2,22 +2,22 @@
 #Important to set the names of the parameters in lower-case
 
 [CNN]
-numEpV=200,300,500
-learningRateV=0.0001,0.001,0.01
-selfdrV=0.1,0.2,0.4
-nUnitsV=100,200
-nLayersV=1,2,3
-BalanceV=50,70
-SamplingV=random,ENN,SMOTE_random,SMOTE_ENN
+numepv=200,300,500
+learningratev=0.0001,0.001,0.01
+selfdrv=0.1,0.2,0.4
+nunitsv=100,200
+nlayersv=1,2,3
+balancev=50,70
+samplingv=random,ENN,SMOTE_random,SMOTE_ENN
 
 [FFN]
-numEpV=200,300,500
-learningRateV=0.0001,0.001,0.01
-selfdrV=0.1,0.2,0.4
-nUnitsV=100,200
-nLayersV=1,2,3
-BalanceV=50,70
-SamplingV=random,ENN,SMOTE_random,SMOTE_ENN
+numepv=200,300,500
+learningratev=0.0001,0.001,0.01
+selfdrv=0.1,0.2,0.4
+nunitsv=100,200
+nlayersv=1,2,3
+balancev=50,70
+samplingv=random,ENN,SMOTE_random,SMOTE_ENN
 
 [GB]
 n_estimators=70,80,90

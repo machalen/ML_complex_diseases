@@ -4,7 +4,7 @@ Python scripts for running the machine learning (ML) and deep learning (DL) mode
 Magdalena Arnal Segura, 2024
 https://doi.org/10.1101/2024.03.18.585541
 
-This work is part of the PhD thesis titled [*"Machine Learning Methods Applied to Classify Complex Diseases Using Genomic Data"*](URL) defended by Magdalena Arnal Segura in March 2024 at Sapienza Università di Roma.
+This work is part of the PhD thesis titled [*"Machine Learning Methods Applied to Classify Complex Diseases Using Genomic Data"*](https://iris.uniroma1.it/handle/11573/1706863) defended by Magdalena Arnal Segura in March 2024 at Sapienza Università di Roma.
 
 ### Author/Support
 
@@ -67,11 +67,6 @@ python ./Python_scripts/2_GB_FinalModel.py
 
 ```
 
-### Limitations
-
-This release was tested with the default parameters for human and mouse genomes.
-Mammal genomes require at least 16GB of RAM, ideally 32GB.
-Please contact the author for a list of recommended parameters for much larger or much smaller genomes.
 
 
 
