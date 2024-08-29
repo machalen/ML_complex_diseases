@@ -39,8 +39,6 @@ Iterating over different folds in the inner and outer loop allows for the use of
 
 #### Hyperparameter selection in the inner loop of the nested CV
 
-&nbsp;
-
 The grid search approach is employed for hyperparameter selection, which involves listing a set of values for each hyperparameter, and testing all possible combinations. The set of hyperparameters to test is listed in the __*parameters.txt*__ file located in the __Hyperparameters__ directory and is divided into subsections corresponding to each method. The __*parameters.txt*__ file can be modified to define the [values](Hyperparameters/README.md) to test in the grid search.
 
 The first step is to run the inner loop of the nested CV (10-fold CV) for hyperparameter selection. This step is run 5 times, one for each fold in the outer loop ($manualFold parameter in the code from 0 to 4). The example below is to run LR, but the same input parameters apply to all methods except for CNN.
@@ -60,7 +58,6 @@ manualFold=0
 #Run the code for LR
 python ./Python_scripts/LR/1_LR_With_nestedCV.py -m "$inMtrx" -l "$inLab" -o "$outDir" -c "$PatCond" -f "$manualFold"
 ```
-&nbsp;
 
 For the CNN, the command is as follows:
 
@@ -83,7 +80,6 @@ manualFold=0
 #Run the code for CNN
 python ./Python_scripts/CNN/1_CNN_With_nestedCV.py -m "$inMtrx" -l "$inLab" -a "$conv_chr" -p "$conv_pos" -o "$outDir" -c "$PatCond" -f "$manualFold"
 ```
-&nbsp;
 
 The previous code will generate files named _'Name_MS_fold0_LR_EvMetrics_CV.txt'_ and _'Name_MS_fold0_CNN_EvMetrics_CV.txt'_ for LR and CNN, respectively. Each row in the file corresponds to a different hyperparameter configuration, and each column represents the mean and standard deviation of different evaluation metrics obtained on the training and test sets. The column containing the hyperparameter configurations lists the hyperparameters separated by vertical bars in the same order as in the __*parameters.txt*__ file.
 
@@ -95,11 +91,7 @@ The column _'TotalRank'_ corresponds to the value of balanced accuracy minus the
 
 #### Final models from the outer loop of the nested CV
 
-&nbsp;
-
 For each fold in the outer loop of the nested CV, the hyperparameter configuration selected in the inner loop is applied in the outer loop. This process is repeated 5 times, once for each fold (specified by the $manualFold parameter in the code from 0 to 4), resulting in 5 different final models.
-
-&nbsp;
 
 ##### Call for LR
 
@@ -127,8 +119,6 @@ sampl_strategy=SMOTE_random
 python ./Python_scripts/LR/2_LR_FinalModel.py -m "$inMtrx" -l "$inLab" -o "$outDir" -c "$PatCond" -f "$manualFold" -v "$H_so" -r "$H_re" -b "$balance" -s "$sampl_strategy"
 
 ```
-
-&nbsp;
 
 ##### Call for GB
 
@@ -162,8 +152,6 @@ sampl_strategy=SMOTE_random
 python ./Python_scripts/GB/2_GB_FinalModel.py -m "$inMtrx" -l "$inLab" -o "$outDir" -c "$PatCond" -f "$manualFold" -e "$H_ne" -r "$H_lr" -a "$H_sb" -d "$H_md" -u "$H_lo" -b "$balance" -s "$sampl_strategy"
 
 ```
-
-&nbsp;
 
 ##### Call for RF and ET
 
@@ -199,8 +187,6 @@ python ./Python_scripts/RF/2_RF_FinalModel.py -m "$inMtrx" -l "$inLab" -o "$outD
 
 ```
 
-&nbsp;
-
 ##### Call for FFN
 
 ```bash
@@ -233,8 +219,6 @@ sampl_strategy=random
 python ./Python_scripts/FFN/2_FFN_FinalModel.py -m "$inMtrx" -l "$inLab" -o "$outDir" -c "$PatCond" -f "$manualFold" -e "$numEp" -r "$learningRate" -d "$selfdr" -u "$nUnits" -y "$nLayers" -b "$balance" -s "$sampl_strategy"
 
 ```
-
-&nbsp;
 
 ##### Call for CNN
 
