@@ -37,7 +37,7 @@ Iterating over different folds in the inner and outer loop allows for the use of
 
 #### Hyperparameter selection
 
-The grid search approach is employed for hyperparameter selection, which involves listing a set of values for each hyperparameter, and testing all possible combinations. The set of hyperparameters are listed in the __*parameters.txt*__ file located in the directory __Hyperparameters__ and are divided into subsections corresponding to each ML method. The __*parameters.txt*__ file can be modified to include the [desired parameters](Hyperparameters/README.md) to test in the grid search.
+The grid search approach is employed for hyperparameter selection, which involves listing a set of values for each hyperparameter, and testing all possible combinations. The set of hyperparameters is listed in the __*parameters.txt*__ file located in the __Hyperparameters__ directory and is divided into subsections corresponding to each ML method. The __*parameters.txt*__ file can be modified to include the [desired parameters](Hyperparameters/README.md) to test in the grid search.
 
 --------------------------------------------------------
 

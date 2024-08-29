@@ -8,11 +8,11 @@ Definition of the set of hyperparameters in the __*parameters.txt*__ file.
 
 The hyperparameters corresponding to the DL methods, CNN and FFN, are illustrated in the image below:
 
-![Figure](../images/Figure_FFN_Architecture_V1.png)\
+![](../images/Figure_FFN_Architecture_V1.png)
 
 #### FFN and CNN
 
-  * __numepv:__ Number of epochs in the model. An epoch is one complete cycle through the entire training dataset by the learning algorithm. In each epoch, the model processes every sample in the dataset once. Values are positive integers.
+  * __numepv:__ Number of epochs in the model. An epoch is one complete cycle through the entire training dataset by the learning algorithm. Values are positive integers.
   * __learningratev:__ Learning rate corresponding to the parameter _'lr'_ in the [torch.optim.Adam](https://pytorch.org/docs/stable/generated/torch.optim.Adam.html) class.
   * __selfdrv:__ Probability of an element to be zeroed in dropout. This is controlled by the parameter _'p'_ in the [torch.nn.functional.dropout](https://pytorch.org/docs/stable/generated/torch.nn.functional.dropout.html) function.
   * __nunitsv:__ Number of units, depicted in green in the figure, which determine the width of the FFN. Values are positive integers.
