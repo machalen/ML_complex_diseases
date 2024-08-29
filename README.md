@@ -37,21 +37,35 @@ Iterating over different folds in the inner and outer loop allows for the use of
 
 #### Hyperparameter selection
 
-The grid search approach is employed for hyperparameter selection, which involves defining a set of values for each hyperparameter and testing all possible combinations. The set of parameters are defined in the __*parameters.txt*__ file located in the directory __./Hyperparameters__. Hyperparameters are divided into subsections corresponding to each ML method. 
+The grid search approach is employed for hyperparameter selection, which involves defining a set of values for each hyperparameter, and testing all possible combinations. The set of parameters are defined in the __*parameters.txt*__ file located in the directory __Hyperparameters__ and are divided into subsections corresponding to each ML method. 
+
+A set of parameters is defined by default in the __*parameters.txt*__ file, but it can be modified.
 
 --------------------------------------------------------
 #### Logistic Regression (LR)
 
 ```bash
-# Get latest STAR source from releases
-wget https://github.com/alexdobin/STAR/archive/2.7.11b.tar.gz
-tar -xzf 2.7.11b.tar.gz
-cd STAR-2.7.11b
+# Run the inner loop of the nested CV (10 CV) for the hyperparameter serlection:
+python ./Python_scripts/1_LR_With_nestedCV.py
 
-# Alternatively, get STAR source using git
-git clone https://github.com/alexdobin/STAR.git
+#Run the outer loop of the nested CV (5 CV) for the final models.
+python ./Python_scripts/2_LR_FinalModel.py
+
 ```
 
+
+
+--------------------------------------------------------
+#### Gradient-Boosted Decision Trees (GB)
+
+```bash
+# Run the inner loop of the nested CV (10 CV) for the hyperparameter serlection:
+python ./Python_scripts/1_GB_With_nestedCV.py
+
+#Run the outer loop of the nested CV (5 CV) for the final models.
+python ./Python_scripts/2_GB_FinalModel.py
+
+```
 
 ### Limitations
 
