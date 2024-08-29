@@ -85,8 +85,6 @@ The previous code will generate files named _'Name_MS_fold0_LR_EvMetrics_CV.txt'
 
 The column _'TotalRank'_ corresponds to the value of balanced accuracy minus the absolute difference between specificity and sensitivity. This metric is used to rank hyperparamaters from the highest (better performance) to the lowest scores (worse performance). However, performance can be interpreted using other evaluation metrics, and consequently, the best hyperparameter configuration can be selected based on different criteria. 
 
-&nbsp;
-
 --------------------------------------------------------
 
 #### Final models from the outer loop of the nested CV
