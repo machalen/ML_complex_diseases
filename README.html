@@ -418,36 +418,25 @@ used in this work, which consists in 10-fold CV for the inner loop, and
 <div id="hyperparameter-selection" class="section level4">
 <h4>Hyperparameter selection</h4>
 <p>The grid search approach is employed for hyperparameter selection,
-which involves defining a set of values for each hyperparameter, and
-testing all possible combinations. The set of hyperparameters are
-defined in the <strong><em>parameters.txt</em></strong> file located in
-the directory <strong>Hyperparameters</strong> and are divided into
-subsections corresponding to each ML method.</p>
-<p>A set of hyperparameters is defined by default in the
-<strong><em>parameters.txt</em></strong> file, but it can be
-modified.</p>
-<table style="width:79%;">
-<colgroup>
-<col width="79%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left">#### Logistic Regression (LR)</td>
-</tr>
-<tr class="even">
-<td align="left">```bash # Run the inner loop of the nested CV (10 CV)
-for the hyperparameter serlection: python
-./Python_scripts/1_LR_With_nestedCV.py</td>
-</tr>
-<tr class="odd">
-<td align="left">#Run the outer loop of the nested CV (5 CV) for the
-final models. python ./Python_scripts/2_LR_FinalModel.py</td>
-</tr>
-<tr class="even">
-<td align="left">```</td>
-</tr>
-</tbody>
-</table>
+which involves listing a set of values for each hyperparameter, and
+testing all possible combinations. The set of hyperparameters are listed
+in the <strong><em>parameters.txt</em></strong> file located in the
+directory <strong>Hyperparameters</strong> and are divided into
+subsections corresponding to each ML method. The
+<strong><em>parameters.txt</em></strong> file can be modified to include
+the <a href="Hyperparameters/README.md">desired parameters</a> to test
+in the grid search.</p>
+<hr />
+</div>
+<div id="logistic-regression-lr" class="section level4">
+<h4>Logistic Regression (LR)</h4>
+<pre class="bash"><code># Run the inner loop of the nested CV (10 CV) for the hyperparameter serlection:
+python ./Python_scripts/1_LR_With_nestedCV.py
+
+#Run the outer loop of the nested CV (5 CV) for the final models.
+python ./Python_scripts/2_LR_FinalModel.py
+</code></pre>
+<hr />
 </div>
 <div id="gradient-boosted-decision-trees-gb" class="section level4">
 <h4>Gradient-Boosted Decision Trees (GB)</h4>

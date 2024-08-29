@@ -37,11 +37,10 @@ Iterating over different folds in the inner and outer loop allows for the use of
 
 #### Hyperparameter selection
 
-The grid search approach is employed for hyperparameter selection, which involves defining a set of values for each hyperparameter, and testing all possible combinations. The set of hyperparameters are defined in the __*parameters.txt*__ file located in the directory __Hyperparameters__ and are divided into subsections corresponding to each ML method. 
-
-A set of hyperparameters is defined by default in the __*parameters.txt*__ file, but it can be modified.
+The grid search approach is employed for hyperparameter selection, which involves listing a set of values for each hyperparameter, and testing all possible combinations. The set of hyperparameters are listed in the __*parameters.txt*__ file located in the directory __Hyperparameters__ and are divided into subsections corresponding to each ML method. The __*parameters.txt*__ file can be modified to include the [desired parameters](Hyperparameters/README.md) to test in the grid search.
 
 --------------------------------------------------------
+
 #### Logistic Regression (LR)
 
 ```bash
@@ -56,6 +55,7 @@ python ./Python_scripts/2_LR_FinalModel.py
 
 
 --------------------------------------------------------
+
 #### Gradient-Boosted Decision Trees (GB)
 
 ```bash
