@@ -424,11 +424,11 @@ loop, and 5-fold CV for the outer loop.</div>
 <hr />
 <div id="hyperparameter-selection-in-the-inner-loop-of-the-nested-cv" class="section level4">
 <h4>Hyperparameter selection in the inner loop of the nested CV</h4>
-<p><br />
-The grid search approach is employed for hyperparameter selection, which
-involves listing a set of values for each hyperparameter, and testing
-all possible combinations. The set of hyperparameters is listed in the
-<strong><em>parameters.txt</em></strong> file located in the
+<p>   </p>
+<p>The grid search approach is employed for hyperparameter selection,
+which involves listing a set of values for each hyperparameter, and
+testing all possible combinations. The set of hyperparameters is listed
+in the <strong><em>parameters.txt</em></strong> file located in the
 <strong>Hyperparameters</strong> directory and is divided into
 subsections corresponding to each ML method. The
 <strong><em>parameters.txt</em></strong> file can be modified to include
@@ -452,8 +452,8 @@ manualFold=0
 
 #Run the code for LR
 python ./Python_scripts/LR/1_LR_With_nestedCV.py -m &quot;$inMtrx&quot; -l &quot;$inLab&quot; -o &quot;$outDir&quot; -c &quot;$PatCond&quot; -f &quot;$manualFold&quot;</code></pre>
-<p><br />
-For the CNN, the command is as follows:</p>
+<p>   </p>
+<p>For the CNN, the command is as follows:</p>
 <pre class="bash"><code>#Input numeric matrix in .txt format where columns are predictors and rows are samples.
 inMtrx=/FullPath/Mtrx.txt
 #Labels corresponding to the sample IDs in the input matrix in .txt format. The first column named eid contains sample IDs and the second column named cond contains binary categories: control or disease condition.
@@ -471,8 +471,8 @@ manualFold=0
 
 #Run the code for CNN
 python ./Python_scripts/CNN/1_CNN_With_nestedCV.py -m &quot;$inMtrx&quot; -l &quot;$inLab&quot; -a &quot;$conv_chr&quot; -p &quot;$conv_pos&quot; -o &quot;$outDir&quot; -c &quot;$PatCond&quot; -f &quot;$manualFold&quot;</code></pre>
-<p><br />
-This code will generate a file named
+<p>   </p>
+<p>This code will generate a file named
 <em>‘Name_MS_fold0_LR_EvMetrics_CV.txt’</em> for LR and
 <em>‘Name_MS_fold0_CNN_EvMetrics_CV.txt’</em> for CNN. Each row in the
 file corresponds to a different hyperparameter configuration, and each
@@ -486,20 +486,19 @@ accuracy minus the absolute difference between specificity and
 sensitivity. This metric is used to rank hyperparamaters from the
 highest (better performance) to the lowest scores (worse performance).
 However, the best hyperparameter configuration can be selected based on
-different criteria.<br />
-</p>
+different criteria.</p>
+<p>   </p>
 <hr />
 </div>
 <div id="final-models-from-the-outer-loop-of-the-nested-cv" class="section level4">
 <h4>Final models from the outer loop of the nested CV</h4>
-<p><br />
-For each fold in the outer loop of the nested CV (5-fold CV), the
+<p>   </p>
+<p>For each fold in the outer loop of the nested CV (5-fold CV), the
 hyperparameter configuration selected in the inner loop is applied in
 the outer loop. This process is repeated 5 times, once for each fold
 ($manualFold parameter in the code from 0 to 4), resulting in 5
 different final models.</p>
-<p><br />
-</p>
+<p>   </p>
 <div id="call-for-lr" class="section level5">
 <h5>Call for LR</h5>
 <pre class="bash"><code>
@@ -525,8 +524,7 @@ sampl_strategy=SMOTE_random
 #Run the code for LR
 python ./Python_scripts/LR/2_LR_FinalModel.py -m &quot;$inMtrx&quot; -l &quot;$inLab&quot; -o &quot;$outDir&quot; -c &quot;$PatCond&quot; -f &quot;$manualFold&quot; -v &quot;$H_so&quot; -r &quot;$H_re&quot; -b &quot;$balance&quot; -s &quot;$sampl_strategy&quot;
 </code></pre>
-<p><br />
-</p>
+<p>   </p>
 </div>
 <div id="call-for-gb" class="section level5">
 <h5>Call for GB</h5>
@@ -559,8 +557,7 @@ sampl_strategy=SMOTE_random
 #Run the code for GB
 python ./Python_scripts/GB/2_GB_FinalModel.py -m &quot;$inMtrx&quot; -l &quot;$inLab&quot; -o &quot;$outDir&quot; -c &quot;$PatCond&quot; -f &quot;$manualFold&quot; -e &quot;$H_ne&quot; -r &quot;$H_lr&quot; -a &quot;$H_sb&quot; -d &quot;$H_md&quot; -u &quot;$H_lo&quot; -b &quot;$balance&quot; -s &quot;$sampl_strategy&quot;
 </code></pre>
-<p><br />
-</p>
+<p>   </p>
 </div>
 <div id="call-for-rf-and-et" class="section level5">
 <h5>Call for RF and ET</h5>
@@ -594,8 +591,7 @@ python ./Python_scripts/ET/2_ET_FinalModel.py -m &quot;$inMtrx&quot; -l &quot;$i
 #Run the code for RF
 python ./Python_scripts/RF/2_RF_FinalModel.py -m &quot;$inMtrx&quot; -l &quot;$inLab&quot; -o &quot;$outDir&quot; -c &quot;$PatCond&quot; -f &quot;$manualFold&quot; -e &quot;$H_ne&quot; -a $H_ss -i $H_sl -d $H_md -b &quot;$balance&quot; -s &quot;$sampl_strategy&quot;
 </code></pre>
-<p><br />
-</p>
+<p>   </p>
 </div>
 <div id="call-for-ffn" class="section level5">
 <h5>Call for FFN</h5>
@@ -628,8 +624,7 @@ sampl_strategy=random
 #Run the code for FFN
 python ./Python_scripts/FFN/2_FFN_FinalModel.py -m &quot;$inMtrx&quot; -l &quot;$inLab&quot; -o &quot;$outDir&quot; -c &quot;$PatCond&quot; -f &quot;$manualFold&quot; -e &quot;$numEp&quot; -r &quot;$learningRate&quot; -d &quot;$selfdr&quot; -u &quot;$nUnits&quot; -y &quot;$nLayers&quot; -b &quot;$balance&quot; -s &quot;$sampl_strategy&quot;
 </code></pre>
-<p><br />
-</p>
+<p>   </p>
 </div>
 <div id="call-for-cnn" class="section level5">
 <h5>Call for CNN</h5>
