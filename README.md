@@ -12,13 +12,13 @@ https://github.com/machalen/ML_complex_diseases/issues </br>
 
 ### Directory Contents
 
-  * __Hyperparameters:__ All parameters used in the hyperparameter selection process.
-  * __Python_scripts:__ Python scripts divided in different subdirectories corresponding to the different ML and DL models.
-  * __requirements.txt:__ Required packages for the installation.
+  * __Hyperparameters:__ Definitions of the parameters used in the hyperparameter selection process.
+  * __Python_scripts:__ Python scripts divided into different subdirectories corresponding to the different ML and DL models.
+  * __requirements.txt:__ List of required packages for installation.
 
 ### Running The Code
 
-All the Python scripts are located in the 'Python_scripts' folder and are organized into subdirectories named according to the ML and DL methods used:
+All the Python scripts are located in the _'Python_scripts'_ folder and are organized into subdirectories named according to the ML and DL methods used:
 
   * [Logistic Regression (LR)](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)
   * [Gradient-Boosted Decision Trees (GB)](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html)
@@ -27,24 +27,23 @@ All the Python scripts are located in the 'Python_scripts' folder and are organi
   * [Feedforward neural network (FFN)](https://pytorch.org/docs/stable/index.html)
   * [Convolutional neural networks (CNN)](https://pytorch.org/docs/stable/index.html)
 
-The strategy employed is nested cross-validation (nested CV), which is an adaptation of the K-fold CV that consists in setting one outer loop and one inner loop of CV. In this approach, the CV in the inner loop is performed on the training set of the outer loop and is used to select the optimum hyperparameter configuration. This step is implemented in the scripts named __*1_XX_With_nestedCV.py*__.
+The strategy employed for training the models is nested cross-validation (nested CV), which is an adaptation of the K-fold CV that consists in setting one outer loop and one inner loop of CV. In this approach, the CV in the inner loop is performed on the training set of the outer loop and is used to select the optimum hyperparameter configuration. This step is implemented in the scripts named __*1_XX_With_nestedCV.py*__.
 
 Conversely, the CV in the outer loop is used to train the final model with the selected hyperparameter configuration obtained from the inner loop, and to test the model with the remaining test set that has not been used for hyperparameter selection or training the model. This step is implemented in the scripts named __*2_XX_FinalModel.py*__.
 
 Iterating over different folds in the inner and outer loop allows for the use of different samples in training, validation, and testing in each iteration, optimizing the use of all the available samples. At the end, nested CV generate as many final models as number of folds in the outer loop.
 
-![The figure represents the nested CV approach used in this repository, which consists in 10-fold CV for the inner loop, and 5-fold CV for the outer loop.](./images/Figure_NestedCV.png)
+![The figure represents the nested CV approach used in this repository, which consists of a 10-fold CV for the inner loop, and a 5-fold CV for the outer loop.](./images/Figure_NestedCV.png)
 
 --------------------------------------------------------
 
 #### Hyperparameter selection in the inner loop of the nested CV
 
 &nbsp;
-&nbsp;
 
-The grid search approach is employed for hyperparameter selection, which involves listing a set of values for each hyperparameter, and testing all possible combinations. The set of hyperparameters is listed in the __*parameters.txt*__ file located in the __Hyperparameters__ directory and is divided into subsections corresponding to each ML method. The __*parameters.txt*__ file can be modified to include the [values](Hyperparameters/README.md) to test in the grid search.
+The grid search approach is employed for hyperparameter selection, which involves listing a set of values for each hyperparameter, and testing all possible combinations. The set of hyperparameters to test is listed in the __*parameters.txt*__ file located in the __Hyperparameters__ directory and is divided into subsections corresponding to each method. The __*parameters.txt*__ file can be modified to define the [values](Hyperparameters/README.md) to test in the grid search.
 
-The first step is to run the inner loop of the nested CV (10-fold CV) for hyperparameter serlection. This step is run 5 times, one for each fold in the outer loop ($manualFold parameter in the code from 0 to 4). The example below is to run LR, but the same input parameters apply to all methods except for CNN.
+The first step is to run the inner loop of the nested CV (10-fold CV) for hyperparameter selection. This step is run 5 times, one for each fold in the outer loop ($manualFold parameter in the code from 0 to 4). The example below is to run LR, but the same input parameters apply to all methods except for CNN.
 
 ```bash
 #Input numeric matrix in .txt format where columns are predictors and rows are samples.
@@ -53,15 +52,14 @@ inMtrx=/FullPath/Mtrx.txt
 inLab=/FullPath/labels.txt 
 #Full path to the results directory.
 outDir=/FullPath/ToResults/Name
-#Name of the disease condition in inputLabels.
+#Name of the disease condition in the input Labels.
 PatCond=MS
-#Fold from the outer loop of the nested cross-validation used in the job (0 to 4).
+#Fold from the outer loop of the nested CV used in the job (0 to 4).
 manualFold=0
 
 #Run the code for LR
 python ./Python_scripts/LR/1_LR_With_nestedCV.py -m "$inMtrx" -l "$inLab" -o "$outDir" -c "$PatCond" -f "$manualFold"
 ```
-&nbsp;
 &nbsp;
 
 For the CNN, the command is as follows:
@@ -77,7 +75,7 @@ conv_chr=FullPath/chr_mtrx.txt
 conv_pos=FullPath/pos_mtrx.txt
 #Full path to the results directory.
 outDir=/FullPath/ToResults/Name
-#Name of the disease condition in inputLabels.
+#Name of the disease condition in input Labels.
 PatCond=MS
 #Fold from the outer loop of the nested cross-validation used in the job (0 to 4).
 manualFold=0
@@ -86,13 +84,11 @@ manualFold=0
 python ./Python_scripts/CNN/1_CNN_With_nestedCV.py -m "$inMtrx" -l "$inLab" -a "$conv_chr" -p "$conv_pos" -o "$outDir" -c "$PatCond" -f "$manualFold"
 ```
 &nbsp;
-&nbsp;
 
-This code will generate a file named _'Name_MS_fold0_LR_EvMetrics_CV.txt'_ for LR and _'Name_MS_fold0_CNN_EvMetrics_CV.txt'_ for CNN. Each row in the file corresponds to a different hyperparameter configuration, and each column represents the mean and standard deviation of different evaluation metrics obtained on the training and test sets. The column containing the hyperparameter configurations lists the hyperparameters separated by vertical bars in the same order as in the __*parameters.txt*__ file.
+The previous code will generate files named _'Name_MS_fold0_LR_EvMetrics_CV.txt'_ and _'Name_MS_fold0_CNN_EvMetrics_CV.txt'_ for LR and CNN, respectively. Each row in the file corresponds to a different hyperparameter configuration, and each column represents the mean and standard deviation of different evaluation metrics obtained on the training and test sets. The column containing the hyperparameter configurations lists the hyperparameters separated by vertical bars in the same order as in the __*parameters.txt*__ file.
 
-The column _'TotalRank'_ corresponds to the value of balanced accuracy minus the absolute difference between specificity and sensitivity. This metric is used to rank hyperparamaters from the highest (better performance) to the lowest scores (worse performance). However, the best hyperparameter configuration can be selected based on different criteria. 
+The column _'TotalRank'_ corresponds to the value of balanced accuracy minus the absolute difference between specificity and sensitivity. This metric is used to rank hyperparamaters from the highest (better performance) to the lowest scores (worse performance). However, performance can be interpreted using other evaluation metrics, and consequently, the best hyperparameter configuration can be selected based on different criteria. 
 
-&nbsp;
 &nbsp;
 
 --------------------------------------------------------
@@ -100,24 +96,21 @@ The column _'TotalRank'_ corresponds to the value of balanced accuracy minus the
 #### Final models from the outer loop of the nested CV
 
 &nbsp;
-&nbsp;
 
-For each fold in the outer loop of the nested CV (5-fold CV), the hyperparameter configuration selected in the inner loop is applied in the outer loop. This process is repeated 5 times, once for each fold ($manualFold parameter in the code from 0 to 4), resulting in 5 different final models.
+For each fold in the outer loop of the nested CV, the hyperparameter configuration selected in the inner loop is applied in the outer loop. This process is repeated 5 times, once for each fold (specified by the $manualFold parameter in the code from 0 to 4), resulting in 5 different final models.
 
-&nbsp;
 &nbsp;
 
 ##### Call for LR
 
 ```bash
-
 #Input numeric matrix in .txt format where columns are predictors and rows are samples.
 inMtrx=/FullPath/Mtrx.txt
 #Labels corresponding to the sample IDs in the input matrix in .txt format. The first column named eid contains sample IDs and the second column named cond contains binary categories: control or disease condition.
 inLab=/FullPath/labels.txt 
 #Full path to the results directory.
 outDir=/FullPath/ToResults/Name
-#Name of the disease condition in inputLabels.
+#Name of the disease condition in input Labels.
 PatCond=MS
 #Fold from the outer loop of the nested cross-validation used in the job (0 to 4).
 manualFold=0
@@ -136,19 +129,17 @@ python ./Python_scripts/LR/2_LR_FinalModel.py -m "$inMtrx" -l "$inLab" -o "$outD
 ```
 
 &nbsp;
-&nbsp;
 
 ##### Call for GB
 
 ```bash
-
 #Input numeric matrix in .txt format where columns are predictors and rows are samples.
 inMtrx=/FullPath/Mtrx.txt
 #Labels corresponding to the sample IDs in the input matrix in .txt format. The first column named eid contains sample IDs and the second column named cond contains binary categories: control or disease condition.
 inLab=/FullPath/labels.txt 
 #Full path to the results directory.
 outDir=/FullPath/ToResults/Name
-#Name of the disease condition in inputLabels.
+#Name of the disease condition in input Labels.
 PatCond=MS
 #Fold from the outer loop of the nested cross-validation used in the job (0 to 4).
 manualFold=0
@@ -173,19 +164,17 @@ python ./Python_scripts/GB/2_GB_FinalModel.py -m "$inMtrx" -l "$inLab" -o "$outD
 ```
 
 &nbsp;
-&nbsp;
 
 ##### Call for RF and ET
 
 ```bash
-
 #Input numeric matrix in .txt format where columns are predictors and rows are samples.
 inMtrx=/FullPath/Mtrx.txt
 #Labels corresponding to the sample IDs in the input matrix in .txt format. The first column named eid contains sample IDs and the second column named cond contains binary categories: control or disease condition.
 inLab=/FullPath/labels.txt 
 #Full path to the results directory.
 outDir=/FullPath/ToResults/Name
-#Name of the disease condition in inputLabels.
+#Name of the disease condition in input Labels.
 PatCond=MS
 #Fold from the outer loop of the nested cross-validation used in the job (0 to 4).
 manualFold=0
@@ -203,27 +192,25 @@ balance=50
 sampl_strategy=SMOTE_random
 
 #Run the code for ET
-python ./Python_scripts/ET/2_ET_FinalModel.py -m "$inMtrx" -l "$inLab" -o "$outDir" -c "$PatCond" -f "$manualFold" -e "$H_ne" -a $H_ss -i $H_sl -d $H_md -b "$balance" -s "$sampl_strategy"
+python ./Python_scripts/ET/2_ET_FinalModel.py -m "$inMtrx" -l "$inLab" -o "$outDir" -c "$PatCond" -f "$manualFold" -e "$H_ne" -a "$H_ss" -i "$H_sl" -d "$H_md" -b "$balance" -s "$sampl_strategy"
 
 #Run the code for RF
-python ./Python_scripts/RF/2_RF_FinalModel.py -m "$inMtrx" -l "$inLab" -o "$outDir" -c "$PatCond" -f "$manualFold" -e "$H_ne" -a $H_ss -i $H_sl -d $H_md -b "$balance" -s "$sampl_strategy"
+python ./Python_scripts/RF/2_RF_FinalModel.py -m "$inMtrx" -l "$inLab" -o "$outDir" -c "$PatCond" -f "$manualFold" -e "$H_ne" -a "$H_ss" -i "$H_sl" -d "$H_md" -b "$balance" -s "$sampl_strategy"
 
 ```
 
-&nbsp;
 &nbsp;
 
 ##### Call for FFN
 
 ```bash
-
 #Input numeric matrix in .txt format where columns are predictors and rows are samples.
 inMtrx=/FullPath/Mtrx.txt
 #Labels corresponding to the sample IDs in the input matrix in .txt format. The first column named eid contains sample IDs and the second column named cond contains binary categories: control or disease condition.
 inLab=/FullPath/labels.txt 
 #Full path to the results directory.
 outDir=/FullPath/ToResults/Name
-#Name of the disease condition in inputLabels.
+#Name of the disease condition in input Labels.
 PatCond=MS
 #Fold from the outer loop of the nested cross-validation used in the job (0 to 4).
 manualFold=0
@@ -248,12 +235,10 @@ python ./Python_scripts/FFN/2_FFN_FinalModel.py -m "$inMtrx" -l "$inLab" -o "$ou
 ```
 
 &nbsp;
-&nbsp;
 
 ##### Call for CNN
 
 ```bash
-
 #Input numeric matrix in .txt format where columns are predictors and rows are samples.
 inMtrx=/FullPath/Mtrx.txt
 #Labels corresponding to the sample IDs in the input matrix in .txt format. The first column named eid contains sample IDs and the second column named cond contains binary categories: control or disease condition.
@@ -264,7 +249,7 @@ conv_chr=FullPath/chr_mtrx.txt
 conv_pos=FullPath/pos_mtrx.txt
 #Full path to the results directory.
 outDir=/FullPath/ToResults/Name
-#Name of the disease condition in inputLabels.
+#Name of the disease condition in input Labels.
 PatCond=MS
 #Fold from the outer loop of the nested cross-validation used in the job (0 to 4).
 manualFold=0
