@@ -365,27 +365,27 @@ illustrated in the image below:</p>
 <div id="ffn-and-cnn" class="section level4">
 <h4>FFN and CNN</h4>
 <ul>
-<li><strong>numepv:</strong> Number of epochs in the model. An epoch is
+<li><strong>numep:</strong> Number of epochs in the model. An epoch is
 one complete cycle through the entire training dataset by the learning
 algorithm. Values are positive integers.</li>
-<li><strong>learningratev:</strong> Learning rate corresponding to the
+<li><strong>learning_rate:</strong> Learning rate corresponding to the
 parameter <em>‘lr’</em> in the <a href="https://pytorch.org/docs/stable/generated/torch.optim.Adam.html">torch.optim.Adam</a>
 class.</li>
-<li><strong>selfdrv:</strong> Probability of an element to be zeroed in
+<li><strong>selfdr:</strong> Probability of an element to be zeroed in
 dropout. This is controlled by the parameter <em>‘p’</em> in the <a href="https://pytorch.org/docs/stable/generated/torch.nn.functional.dropout.html">torch.nn.functional.dropout</a>
 function.</li>
-<li><strong>nunitsv:</strong> Number of units, depicted in green in the
+<li><strong>nunits:</strong> Number of units, depicted in green in the
 figure, which determine the width of the FFN. Values are positive
 integers.</li>
-<li><strong>nlayersv:</strong> Number of layers, depicted in blue in the
+<li><strong>nlayers:</strong> Number of layers, depicted in blue in the
 figure, which determine the depth of the FFN. Values are positive
 integers.</li>
-<li><strong>balancev:</strong> Balancing of cases and controls is
+<li><strong>balance:</strong> Balancing of cases and controls is
 specified as the percentage of controls relative to the total number of
 cases and controls. (Ex. a value of 60 indicates that 60% of the samples
 are controls and 40% are cases). Values range from 0 to 100.</li>
-<li><strong>samplingv:</strong> Sampling strategy. Can be defined with 4
-different input strings:
+<li><strong>sampl_strategy:</strong> Sampling strategy. Can be defined
+with 4 different input strings:
 <ul>
 <li><em>random:</em> Random under-sampling implemented with the <a href="https://imbalanced-learn.org/stable/references/generated/imblearn.under_sampling.RandomUnderSampler.html">imblearn.under_sampling.RandomUnderSampler</a>
 class.</li>

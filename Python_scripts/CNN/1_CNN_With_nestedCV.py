@@ -361,13 +361,13 @@ file_path = os.path.join(script_dir, '..', '..', 'Hyperparameters', 'parameters.
 #Read the hyperparameters for the grid search
 params = read_parameters(file_path, 'CNN')
 
-numEpV=params.get('numepv', [])
-learningRateV=params.get('learningratev', [])
-selfdrV=params.get('selfdrv', [])
-nUnitsV=params.get('nunitsv', [])
-nLayersV=params.get('nlayersv', [])
-BalanceV=params.get('balancev', [])
-SamplingV=params.get('samplingv', [])
+numEpV=params.get('numep', [])
+learningRateV=params.get('learning_rate', [])
+selfdrV=params.get('selfdr', [])
+nUnitsV=params.get('nunits', [])
+nLayersV=params.get('nlayers', [])
+BalanceV=params.get('balance', [])
+SamplingV=params.get('sampl_strategy', [])
 
 #Hyperparameters tested
 hyperparam = []
