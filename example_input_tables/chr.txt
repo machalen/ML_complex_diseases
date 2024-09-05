@@ -1,0 +1,5 @@
+snvIDs	chromosome
+SNV1	14
+SNV2	12
+SNV3	1
+SNV4	16

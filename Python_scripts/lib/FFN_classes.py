@@ -18,7 +18,6 @@ import numpy as np
 # for data visualization
 import matplotlib.pyplot as plt
 import os
-import re
 
 #Important to set a random seed!
 torch.manual_seed(1)
@@ -112,12 +111,12 @@ def PlotPerformance(trainAcc,devAcc, devAcc0, devAcc1, devFscore, losses, outpat
     ax[1,1].plot(devAcc0[:,c], label=f'c {c:.0f}')
     ax[1,2].plot(devAcc1[:,c], label=f'c {c:.0f}')
                     
-  ax[0,0].set_title(f'Train set accuracies mean={trainAcc_mean:.2f}')
+  ax[0,0].set_title(f'Mean of accuracy for the training set={trainAcc_mean:.2f}')
   ax[0,0].set_xlabel('Epoch number')
   ax[0,0].set_ylabel('Accuracy')
   ax[0,0].legend()
 
-  ax[0,1].set_title(f'F-beta in the Dev set mean={devFscore_mean:.2f}')
+  ax[0,1].set_title(f'Mean of F-beta for the validation set={devFscore_mean:.2f}')
   ax[0,1].set_xlabel('Epoch number')
   ax[0,1].set_ylabel('F-beta')
   ax[0,1].legend()
@@ -127,17 +126,17 @@ def PlotPerformance(trainAcc,devAcc, devAcc0, devAcc1, devFscore, losses, outpat
   ax[0,2].set_ylabel('Loss')
   ax[0,2].legend()
 
-  ax[1,0].set_title(f'Accuracy in the dev set mean={devAcc_mean:.2f}')
+  ax[1,0].set_title(f'Mean of accuracy for the validation set={devAcc_mean:.2f}')
   ax[1,0].set_xlabel('Epoch number')
   ax[1,0].set_ylabel('Accuracy')
   ax[1,0].legend()
 
-  ax[1,1].set_title(f'Specificity in the dev set mean={devAcc0_mean:.2f}')
+  ax[1,1].set_title(f'Mean of specificity for the validation set={devAcc0_mean:.2f}')
   ax[1,1].set_xlabel('Epoch number')
   ax[1,1].set_ylabel('Specificity')
   ax[1,1].legend()
 
-  ax[1,2].set_title(f'Sensitivity in the dev set mean={devAcc1_mean:.2f}')
+  ax[1,2].set_title(f'Mean of sensitivity for the validation set={devAcc1_mean:.2f}')
   ax[1,2].set_xlabel('Epoch number')
   ax[1,2].set_ylabel('Sensitivity')
   ax[1,2].legend()
