@@ -581,7 +581,7 @@ print('Negative Predicted Value is:',NPV)
 
 #Build the dataframe with the predictions
 x_telab['y_pred']=yHat_pre.numpy()
-x_telab['Prob']=yHat_prob.numpy()
+x_telab['Prob1']=yHat_prob.numpy()
 
 #################Output results###########################
 
@@ -590,6 +590,13 @@ x_telab.to_csv(f3_output, index=None, sep='\t')
 
 #Path to save the final results of the evaluation metrics for the test set.
 GlobalResults=outDir+'TestFinalResults.txt'
+
+# Check if the file exists
+if not os.path.exists(GlobalResults):
+    header = "condition\tmodel\tinput_matrix\tn_predictors\tn_controls\tn_cases\thyperparameters\tfold\taccuracy\tspecificity\tsensitivity\trocauc\tfscore\tPPV\tNPV\n"
+    # If the file doesn't exist, create it and write the header
+    with open(GlobalResults, 'w') as f:
+        f.write(header)
 
 #Convert parameters to strings
 with open(GlobalResults, 'a+') as f:

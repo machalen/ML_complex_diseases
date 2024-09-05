@@ -326,35 +326,35 @@ def MakeEvalSum(mtrx_acc, mtrx_acc0, mtrx_acc1, mtrx_prec, mtrx_recall, mtrx_fsc
     
     #Save the table with the results of the evaluation metrics
     mtrxEv_df = pd.DataFrame()
-    mtrxEv_df['HyperParam']  = hyperparam
-    mtrxEv_df['acc_ValMean']  = val_mean
-    mtrxEv_df['acc_ValStd']  = val_std
-    mtrxEv_df['acc_TrainMean']  = train_mean
-    mtrxEv_df['acc_TrainStd']  = train_std
-    mtrxEv_df['acc0_ValMean']  = val_mean_0
-    mtrxEv_df['acc0_ValStd']  = val_std_0
-    mtrxEv_df['acc0_TrainMean']  = train_mean_0
-    mtrxEv_df['acc0_TrainStd']  = train_std_0
-    mtrxEv_df['acc1_ValMean']  = val_mean_1
-    mtrxEv_df['acc1_ValStd']  = val_std_1
-    mtrxEv_df['acc1_TrainMean']  = train_mean_1
-    mtrxEv_df['acc1_TrainStd']  = train_std_1
-    mtrxEv_df['prec_ValMean']  = val_mean_prec
-    mtrxEv_df['prec_ValStd']  = val_std_prec
-    mtrxEv_df['recall_ValMean']  = val_mean_recall
-    mtrxEv_df['recall_ValStd']  = val_std_recall
-    mtrxEv_df['fscore_ValMean']  = val_mean_fscore
-    mtrxEv_df['fscore_ValStd']  = val_std_fscore
-    mtrxEv_df['roc_ValMean']  = val_mean_roc
-    mtrxEv_df['roc_ValStd']  = val_std_roc
-    mtrxEv_df['pr_ValMean']  = val_mean_pr
-    mtrxEv_df['pr_ValStd']  = val_std_pr
+    mtrxEv_df['hyperparameters']  = hyperparam
+    mtrxEv_df['accuracy_validation_mean']  = val_mean
+    mtrxEv_df['accuracy_validation_std']  = val_std
+    mtrxEv_df['accuracy_train_mean']  = train_mean
+    mtrxEv_df['accuracy_train_std']  = train_std
+    mtrxEv_df['specificity_validation_mean']  = val_mean_0
+    mtrxEv_df['specificity_validation_std']  = val_std_0
+    mtrxEv_df['specificity_train_mean']  = train_mean_0
+    mtrxEv_df['specificity_train_std']  = train_std_0
+    mtrxEv_df['sensitivity_validation_mean']  = val_mean_1
+    mtrxEv_df['sensitivity_validation_std']  = val_std_1
+    mtrxEv_df['sensitivity_train_mean']  = train_mean_1
+    mtrxEv_df['sensitivity_train_std']  = train_std_1
+    mtrxEv_df['precision_validation_mean']  = val_mean_prec
+    mtrxEv_df['precision_validation_std']  = val_std_prec
+    mtrxEv_df['recall_validation_mean']  = val_mean_recall
+    mtrxEv_df['recall_validation_std']  = val_std_recall
+    mtrxEv_df['fscore_validation_mean']  = val_mean_fscore
+    mtrxEv_df['fscore_validation_std']  = val_std_fscore
+    mtrxEv_df['rocauc_validation_mean']  = val_mean_roc
+    mtrxEv_df['rocauc_validation_std']  = val_std_roc
+    mtrxEv_df['precrecall_validation_mean']  = val_mean_pr
+    mtrxEv_df['precrecall_validation_std']  = val_std_pr
     #Save custom made metrics
-    mtrxEv_df['loss_score1'] =[(a + b)/2 for a, b in zip(val_mean_0, val_mean_1)]
-    mtrxEv_df['loss_score2'] =[abs(a - b) for a, b in zip(val_mean_0, val_mean_1)]
-    mtrxEv_df['TotalRank'] = mtrxEv_df['loss_score1'] - mtrxEv_df['loss_score2']
+    mtrxEv_df['score1'] =[(a + b)/2 for a, b in zip(val_mean_0, val_mean_1)]
+    mtrxEv_df['score2'] =[abs(a - b) for a, b in zip(val_mean_0, val_mean_1)]
+    mtrxEv_df['rank_score'] = mtrxEv_df['score1'] - mtrxEv_df['score2']
     #Sort the table
-    mtrxEv_df = mtrxEv_df.sort_values(by='TotalRank', ascending=False)
+    mtrxEv_df = mtrxEv_df.sort_values(by='rank_score', ascending=False)
 
     return(mtrxEv_df)
 

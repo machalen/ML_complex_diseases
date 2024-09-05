@@ -361,6 +361,13 @@ GlobalResults=outDir+'TestFinalResults.txt'
 c=(H_so,H_re,balance,sampl_strategy)
 Hiper='|'.join(str(p) for p in c)
 
+# Check if the file exists
+if not os.path.exists(GlobalResults):
+    header = "condition\tmodel\tinput_matrix\tn_predictors\tn_controls\tn_cases\thyperparameters\tfold\taccuracy\tspecificity\tsensitivity\trocauc\tfscore\tPPV\tNPV\n"
+    # If the file doesn't exist, create it and write the header
+    with open(GlobalResults, 'w') as f:
+        f.write(header)
+
 with open(GlobalResults, 'a+') as f:
     f.write(PatCond +'\t'+'LR'+'\t'+ inMtrxName +
     '\t' + str(PredNum) +

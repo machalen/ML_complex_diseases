@@ -385,22 +385,22 @@ print(now2-now1)
 
 #Save the full results
 nested_CV_results=pd.DataFrame()
-nested_CV_results['HyperParam']  = hyperparam
-nested_CV_results['acc_train_mean']  = acc_train_mean
-nested_CV_results['acc_train_std']  = acc_train_std
-nested_CV_results['acc_dev_mean']  = acc_dev_mean
-nested_CV_results['acc_dev_std']  = acc_dev_std
-nested_CV_results['acc0_dev_mean']  = acc0_dev_mean
-nested_CV_results['acc0_dev_std']  = acc0_dev_std
-nested_CV_results['acc1_dev_mean']  = acc1_dev_mean
-nested_CV_results['acc1_dev_std']  = acc1_dev_std
-nested_CV_results['fscore_dev_mean']  = fscore_dev_mean
-nested_CV_results['fscore_dev_std']  = fscore_dev_std
-nested_CV_results['loss_score1']  = loss_score1
-nested_CV_results['loss_score2']  = loss_score2
-nested_CV_results['TotalRank']  = TotalRank
+nested_CV_results['hyperparameters']  = hyperparam
+nested_CV_results['accuracy_train_mean']  = acc_train_mean
+nested_CV_results['accuracy_train_std']  = acc_train_std
+nested_CV_results['accuracy_validation_mean']  = acc_dev_mean
+nested_CV_results['accuracy_validation_std']  = acc_dev_std
+nested_CV_results['specificity_validation_mean']  = acc0_dev_mean
+nested_CV_results['specificity_validation_std']  = acc0_dev_std
+nested_CV_results['sensitivity_validation_mean']  = acc1_dev_mean
+nested_CV_results['sensitivity_validation_std']  = acc1_dev_std
+nested_CV_results['fscore_validation_mean']  = fscore_dev_mean
+nested_CV_results['fscore_validation_std']  = fscore_dev_std
+nested_CV_results['score1']  = loss_score1
+nested_CV_results['score2']  = loss_score2
+nested_CV_results['rank_score']  = TotalRank
 
-nested_CV_results = nested_CV_results.sort_values(by='TotalRank', ascending=False)
+nested_CV_results = nested_CV_results.sort_values(by='rank_score', ascending=False)
 
 f_output=outDir+ PatCond + '_fold' + str(manualFold)+'_FFN_EvMetrics_CV.txt'
 nested_CV_results.to_csv(f_output, index=None, sep='\t')
