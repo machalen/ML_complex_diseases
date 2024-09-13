@@ -13,7 +13,7 @@ https://github.com/machalen/ML_complex_diseases/issues </br>
 ### Directory Contents
 
   * __Hyperparameters:__ Definitions of the parameters used in the hyperparameter selection process.
-  * __Python_scripts:__ Python scripts divided into different subdirectories corresponding to the different ML and DL models.
+  * __Python_scripts:__ Python scripts divided into different subdirectories corresponding to the different ML and DL methods.
   * __requirements.txt:__ List of required packages for installation.
 
 ### Running The Code
@@ -39,7 +39,7 @@ Iterating over different folds in the inner and outer loop allows for the use of
 
 #### Hyperparameter selection in the inner loop of the nested CV
 
-The grid search approach is employed for hyperparameter selection, which involves listing a set of values for each hyperparameter, and testing all possible combinations. The set of hyperparameters to test is listed in the __*parameters.txt*__ file located in the __Hyperparameters__ directory and is divided into subsections corresponding to each method. The __*parameters.txt*__ file can be modified to define the [values](Hyperparameters/README.md) to test in the grid search.
+The grid search approach is employed for hyperparameter selection, which involves listing a set of values for each hyperparameter, and testing all possible combinations. The set of hyperparameters to test is listed in the __*parameters.txt*__ file located in the __Hyperparameters__ directory and is divided into subsections corresponding to each ML method. The [__*parameters.txt*__](Hyperparameters/parameters.txt) file can be modified to define the [values](Hyperparameters/README.md) to test in the grid search.
 
 The first step is to run the inner loop of the nested CV (10-fold CV) for hyperparameter selection. This step is run 5 times, one for each fold in the outer loop ($manualFold parameter in the code from 0 to 4). The example below is to run LR, but the same input parameters apply to all methods except for CNN.
 
@@ -81,9 +81,9 @@ manualFold=0
 python ./Python_scripts/CNN/1_CNN_With_nestedCV.py -m "$inMtrx" -l "$inLab" -a "$conv_chr" -p "$conv_pos" -o "$outDir" -c "$PatCond" -f "$manualFold"
 ```
 
-The previous code will generate files named _'Name_MS_fold0_LR_EvMetrics_CV.txt'_ and _'Name_MS_fold0_CNN_EvMetrics_CV.txt'_ for LR and CNN, respectively. Each row in the file corresponds to a different hyperparameter configuration, and each column represents the mean and standard deviation of different evaluation metrics obtained on the training and test sets. The column containing the hyperparameter configurations lists the hyperparameters separated by vertical bars in the same order as in the __*parameters.txt*__ file.
+The previous code will generate files named _'Name_MS_fold0_LR_EvMetrics_CV.txt'_ and _'Name_MS_fold0_CNN_EvMetrics_CV.txt'_ for LR and CNN, respectively. Each row in the file corresponds to a different hyperparameter configuration, and each column represents the mean and standard deviation of different evaluation metrics obtained from the training and validation subsets. The column containing the hyperparameter configurations lists the hyperparameters separated by vertical bars in the same order as in the [__*parameters.txt*__](Hyperparameters/parameters.txt) file.
 
-The column _'TotalRank'_ corresponds to the value of balanced accuracy minus the absolute difference between specificity and sensitivity. This metric is used to rank hyperparamaters from the highest (better performance) to the lowest scores (worse performance). However, performance can be interpreted using other evaluation metrics, and consequently, the best hyperparameter configuration can be selected based on different criteria. 
+The column _'rank_score'_ corresponds to the value of balanced accuracy minus the absolute difference between specificity and sensitivity. This metric is used to rank hyperparamaters from the highest (better performance) to the lowest scores (worse performance). However, performance can be interpreted using other evaluation metrics, and consequently, the best hyperparameter configuration can be selected based on different criteria. 
 
 --------------------------------------------------------
 
@@ -254,3 +254,16 @@ sampl_strategy=random
 python ./Python_scripts/CNN/2_CNN_FinalModel.py -m "$inMtrx" -l "$inLab" -a "$conv_chr" -p "$conv_pos" -o "$outDir" -c "$PatCond" -f "$manualFold" -e "$numEp" -r "$learningRate" -d "$selfdr" -u "$nUnits" -y "$nLayers" -b "$balance" -s "$sampl_strategy"
 
 ```
+
+The call of the final models generates several output files (X=fold and XX=method in the file names):
+
+  * __TestFinal_TestFinalResults.txt__: The results of the different final models are summarized in this file. With the results appended row by row.
+  * __TestFinal_Trained_XX_FoldX.joblib__: This file contains the trained final model for the ML models (LR, GB, RF and ET).
+  * __TestSampl_Trained_XX_X_net.pt__: This file contains the trained final model for the DL models (FFN and CNN).
+  * __TestSampl_FoldX_XX_Samples.txt__: Classified samples in the testing subset with the predicted label and corresponding probabilities.
+  * __TestFinal_FoldX_XX_TrainingIDs.txt__: List of samples used for training in the DL models.
+  * __TestSampl_FoldX_XX_Predictors.txt__: List of predictors with their corresponding feature importance, as assigned by the ML models. In the case of LR the feature importance corresponds to the coefficient of the features in the decision function.
+  * __TestFinal_Attributes_XX_X_lig.txt__: Importance score for each input feature obtained with layer integrated gradients for DL models.
+  * __TestFinal_Attributes_XX_X_dl.txt__: Importance score for each input feature obtained with DeepLIFT algorithm for DL models.
+  * __TestFinal_Attributes_XX_X_sl.txt__: Importance score for each input feature obtained with saliency maps for DL models.
+  * __TestFinal_Attributes_XX_X_gbp.txt__: Importance score for each input feature obtained with guided backpropagation for DL models.

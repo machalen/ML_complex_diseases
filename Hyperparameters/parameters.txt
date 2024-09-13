@@ -1,5 +1,5 @@
 #Set of hyperparameters tested in nested cross-validation.
-#Important to set the names of the parameters in lower-case
+#IMPORTANT! Do not change the names of the methods or hyperparameters.
 
 [CNN]
 numep=200

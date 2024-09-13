@@ -374,7 +374,7 @@ Sapienza Università di Roma.</p>
 in the hyperparameter selection process.</li>
 <li><strong>Python_scripts:</strong> Python scripts divided into
 different subdirectories corresponding to the different ML and DL
-models.</li>
+methods.</li>
 <li><strong>requirements.txt:</strong> List of required packages for
 installation.</li>
 </ul>
@@ -425,15 +425,13 @@ loop, and a 5-fold CV for the outer loop.</div>
 <hr />
 <div id="hyperparameter-selection-in-the-inner-loop-of-the-nested-cv" class="section level4">
 <h4>Hyperparameter selection in the inner loop of the nested CV</h4>
-<p> </p>
 <p>The grid search approach is employed for hyperparameter selection,
 which involves listing a set of values for each hyperparameter, and
 testing all possible combinations. The set of hyperparameters to test is
 listed in the <strong><em>parameters.txt</em></strong> file located in
 the <strong>Hyperparameters</strong> directory and is divided into
-subsections corresponding to each method. The
-<strong><em>parameters.txt</em></strong> file can be modified to define
-the <a href="Hyperparameters/README.md">values</a> to test in the grid
+subsections corresponding to each ML method. The <a href="Hyperparameters/parameters.txt"><strong><em>parameters.txt</em></strong></a>
+file can be modified to define the <a href="Hyperparameters/README.md">values</a> to test in the grid
 search.</p>
 <p>The first step is to run the inner loop of the nested CV (10-fold CV)
 for hyperparameter selection. This step is run 5 times, one for each
@@ -453,7 +451,6 @@ manualFold=0
 
 #Run the code for LR
 python ./Python_scripts/LR/1_LR_With_nestedCV.py -m &quot;$inMtrx&quot; -l &quot;$inLab&quot; -o &quot;$outDir&quot; -c &quot;$PatCond&quot; -f &quot;$manualFold&quot;</code></pre>
-<p> </p>
 <p>For the CNN, the command is as follows:</p>
 <pre class="bash"><code>#Input numeric matrix in .txt format where columns are predictors and rows are samples.
 inMtrx=/FullPath/Mtrx.txt
@@ -472,36 +469,32 @@ manualFold=0
 
 #Run the code for CNN
 python ./Python_scripts/CNN/1_CNN_With_nestedCV.py -m &quot;$inMtrx&quot; -l &quot;$inLab&quot; -a &quot;$conv_chr&quot; -p &quot;$conv_pos&quot; -o &quot;$outDir&quot; -c &quot;$PatCond&quot; -f &quot;$manualFold&quot;</code></pre>
-<p> </p>
 <p>The previous code will generate files named
 <em>‘Name_MS_fold0_LR_EvMetrics_CV.txt’</em> and
 <em>‘Name_MS_fold0_CNN_EvMetrics_CV.txt’</em> for LR and CNN,
 respectively. Each row in the file corresponds to a different
 hyperparameter configuration, and each column represents the mean and
-standard deviation of different evaluation metrics obtained on the
-training and test sets. The column containing the hyperparameter
-configurations lists the hyperparameters separated by vertical bars in
-the same order as in the <strong><em>parameters.txt</em></strong>
+standard deviation of different evaluation metrics obtained from the
+training and validation subsets. The column containing the
+hyperparameter configurations lists the hyperparameters separated by
+vertical bars in the same order as in the <a href="Hyperparameters/parameters.txt"><strong><em>parameters.txt</em></strong></a>
 file.</p>
-<p>The column <em>‘TotalRank’</em> corresponds to the value of balanced
+<p>The column <em>‘rank_score’</em> corresponds to the value of balanced
 accuracy minus the absolute difference between specificity and
 sensitivity. This metric is used to rank hyperparamaters from the
 highest (better performance) to the lowest scores (worse performance).
 However, performance can be interpreted using other evaluation metrics,
 and consequently, the best hyperparameter configuration can be selected
 based on different criteria.</p>
-<p> </p>
 <hr />
 </div>
 <div id="final-models-from-the-outer-loop-of-the-nested-cv" class="section level4">
 <h4>Final models from the outer loop of the nested CV</h4>
-<p> </p>
 <p>For each fold in the outer loop of the nested CV, the hyperparameter
 configuration selected in the inner loop is applied in the outer loop.
 This process is repeated 5 times, once for each fold (specified by the
 $manualFold parameter in the code from 0 to 4), resulting in 5 different
 final models.</p>
-<p> </p>
 <div id="call-for-lr" class="section level5">
 <h5>Call for LR</h5>
 <pre class="bash"><code>#Input numeric matrix in .txt format where columns are predictors and rows are samples.
@@ -526,7 +519,6 @@ sampl_strategy=SMOTE_random
 #Run the code for LR
 python ./Python_scripts/LR/2_LR_FinalModel.py -m &quot;$inMtrx&quot; -l &quot;$inLab&quot; -o &quot;$outDir&quot; -c &quot;$PatCond&quot; -f &quot;$manualFold&quot; -v &quot;$H_so&quot; -r &quot;$H_re&quot; -b &quot;$balance&quot; -s &quot;$sampl_strategy&quot;
 </code></pre>
-<p> </p>
 </div>
 <div id="call-for-gb" class="section level5">
 <h5>Call for GB</h5>
@@ -558,7 +550,6 @@ sampl_strategy=SMOTE_random
 #Run the code for GB
 python ./Python_scripts/GB/2_GB_FinalModel.py -m &quot;$inMtrx&quot; -l &quot;$inLab&quot; -o &quot;$outDir&quot; -c &quot;$PatCond&quot; -f &quot;$manualFold&quot; -e &quot;$H_ne&quot; -r &quot;$H_lr&quot; -a &quot;$H_sb&quot; -d &quot;$H_md&quot; -u &quot;$H_lo&quot; -b &quot;$balance&quot; -s &quot;$sampl_strategy&quot;
 </code></pre>
-<p> </p>
 </div>
 <div id="call-for-rf-and-et" class="section level5">
 <h5>Call for RF and ET</h5>
@@ -591,7 +582,6 @@ python ./Python_scripts/ET/2_ET_FinalModel.py -m &quot;$inMtrx&quot; -l &quot;$i
 #Run the code for RF
 python ./Python_scripts/RF/2_RF_FinalModel.py -m &quot;$inMtrx&quot; -l &quot;$inLab&quot; -o &quot;$outDir&quot; -c &quot;$PatCond&quot; -f &quot;$manualFold&quot; -e &quot;$H_ne&quot; -a &quot;$H_ss&quot; -i &quot;$H_sl&quot; -d &quot;$H_md&quot; -b &quot;$balance&quot; -s &quot;$sampl_strategy&quot;
 </code></pre>
-<p> </p>
 </div>
 <div id="call-for-ffn" class="section level5">
 <h5>Call for FFN</h5>
@@ -623,7 +613,6 @@ sampl_strategy=random
 #Run the code for FFN
 python ./Python_scripts/FFN/2_FFN_FinalModel.py -m &quot;$inMtrx&quot; -l &quot;$inLab&quot; -o &quot;$outDir&quot; -c &quot;$PatCond&quot; -f &quot;$manualFold&quot; -e &quot;$numEp&quot; -r &quot;$learningRate&quot; -d &quot;$selfdr&quot; -u &quot;$nUnits&quot; -y &quot;$nLayers&quot; -b &quot;$balance&quot; -s &quot;$sampl_strategy&quot;
 </code></pre>
-<p> </p>
 </div>
 <div id="call-for-cnn" class="section level5">
 <h5>Call for CNN</h5>
@@ -659,6 +648,38 @@ sampl_strategy=random
 #Run the code for CNN
 python ./Python_scripts/CNN/2_CNN_FinalModel.py -m &quot;$inMtrx&quot; -l &quot;$inLab&quot; -a &quot;$conv_chr&quot; -p &quot;$conv_pos&quot; -o &quot;$outDir&quot; -c &quot;$PatCond&quot; -f &quot;$manualFold&quot; -e &quot;$numEp&quot; -r &quot;$learningRate&quot; -d &quot;$selfdr&quot; -u &quot;$nUnits&quot; -y &quot;$nLayers&quot; -b &quot;$balance&quot; -s &quot;$sampl_strategy&quot;
 </code></pre>
+<p>The call of the final models generates several output files (X=fold
+and XX=method in the file names):</p>
+<ul>
+<li><strong>TestFinal_TestFinalResults.txt</strong>: The results of the
+different final models are summarized in this file. With the results
+appended row by row.</li>
+<li><strong>TestFinal_Trained_XX_FoldX.joblib</strong>: This file
+contains the trained final model for the ML models (LR, GB, RF and
+ET).</li>
+<li><strong>TestSampl_Trained_XX_X_net.pt</strong>: This file contains
+the trained final model for the DL models (FFN and CNN).</li>
+<li><strong>TestSampl_FoldX_XX_Samples.txt</strong>: Classified samples
+in the testing subset with the predicted label and corresponding
+probabilities.</li>
+<li><strong>TestFinal_FoldX_XX_TrainingIDs.txt</strong>: List of samples
+used for training in the DL models.</li>
+<li><strong>TestSampl_FoldX_XX_Predictors.txt</strong>: List of
+predictors with their corresponding feature importance, as assigned by
+the ML models. In the case of LR the feature importance corresponds to
+the coefficient of the features in the decision function.</li>
+<li><strong>TestFinal_Attributes_XX_X_lig.txt</strong>: Importance score
+for each input feature obtained with layer integrated gradients for DL
+models.</li>
+<li><strong>TestFinal_Attributes_XX_X_dl.txt</strong>: Importance score
+for each input feature obtained with DeepLIFT algorithm for DL
+models.</li>
+<li><strong>TestFinal_Attributes_XX_X_sl.txt</strong>: Importance score
+for each input feature obtained with saliency maps for DL models.</li>
+<li><strong>TestFinal_Attributes_XX_X_gbp.txt</strong>: Importance score
+for each input feature obtained with guided backpropagation for DL
+models.</li>
+</ul>
 </div>
 </div>
 </div>
