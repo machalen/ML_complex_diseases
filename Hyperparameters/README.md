@@ -1,6 +1,6 @@
 # Definition of Hyperparameters
 
-Definition of the set of hyperparameters in the __*parameters.txt*__ file.
+Definition of the hyperparameters in the __*parameters.txt*__ file.
 
 ---
 
