@@ -27,6 +27,8 @@ All the Python scripts are located in the _'Python_scripts'_ folder and are orga
   * [Feedforward neural network (FFN)](https://pytorch.org/docs/stable/index.html)
   * [Convolutional neural networks (CNN)](https://pytorch.org/docs/stable/index.html)
 
+Reference input tables are provided in the _'example_input_tables'_ folder. An example to run the scripts is provided in [__*ScriptsToCallSampleData.sh*__](./ScriptsToCallSampleData.sh).
+
 The strategy employed for training the models is nested cross-validation (nested CV), which is an adaptation of the K-fold CV that consists in setting one outer loop and one inner loop of CV. In this approach, the CV in the inner loop is performed on the training set of the outer loop and is used to select the optimum hyperparameter configuration. This step is implemented in the scripts named __*1_XX_With_nestedCV.py*__.
 
 Conversely, the CV in the outer loop is used to train the final model with the selected hyperparameter configuration obtained from the inner loop, and to test the model with the remaining test set that has not been used for hyperparameter selection or training the model. This step is implemented in the scripts named __*2_XX_FinalModel.py*__.
@@ -260,10 +262,11 @@ The call of the final models generates several output files (X=fold and XX=metho
   * __TestFinal_TestFinalResults.txt__: The results of the different final models are summarized in this file. With the results appended row by row.
   * __TestFinal_Trained_XX_FoldX.joblib__: This file contains the trained final model for the ML models (LR, GB, RF and ET).
   * __TestSampl_Trained_XX_X_net.pt__: This file contains the trained final model for the DL models (FFN and CNN).
-  * __TestSampl_FoldX_XX_Samples.txt__: Classified samples in the testing subset with the predicted label and corresponding probabilities.
+  * __TestSampl_FoldX_XX_Samples.txt__: Classified samples in the test set with the predicted label and corresponding probabilities.
   * __TestFinal_FoldX_XX_TrainingIDs.txt__: List of samples used for training in the DL models.
   * __TestSampl_FoldX_XX_Predictors.txt__: List of predictors with their corresponding feature importance, as assigned by the ML models. In the case of LR the feature importance corresponds to the coefficient of the features in the decision function.
   * __TestFinal_Attributes_XX_X_lig.txt__: Importance score for each input feature obtained with layer integrated gradients for DL models.
   * __TestFinal_Attributes_XX_X_dl.txt__: Importance score for each input feature obtained with DeepLIFT algorithm for DL models.
   * __TestFinal_Attributes_XX_X_sl.txt__: Importance score for each input feature obtained with saliency maps for DL models.
   * __TestFinal_Attributes_XX_X_gbp.txt__: Importance score for each input feature obtained with guided backpropagation for DL models.
+

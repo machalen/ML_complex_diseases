@@ -398,6 +398,9 @@ neural network (FFN)</a></li>
 <li><a href="https://pytorch.org/docs/stable/index.html">Convolutional
 neural networks (CNN)</a></li>
 </ul>
+<p>Reference input tables are provided in the
+<em>‘example_input_tables’</em> folder. An example to run the scripts is
+provided in <a href="./ScriptsToCallSampleData.sh"><strong><em>ScriptsToCallSampleData.sh</em></strong></a>.</p>
 <p>The strategy employed for training the models is nested
 cross-validation (nested CV), which is an adaptation of the K-fold CV
 that consists in setting one outer loop and one inner loop of CV. In
@@ -660,7 +663,7 @@ ET).</li>
 <li><strong>TestSampl_Trained_XX_X_net.pt</strong>: This file contains
 the trained final model for the DL models (FFN and CNN).</li>
 <li><strong>TestSampl_FoldX_XX_Samples.txt</strong>: Classified samples
-in the testing subset with the predicted label and corresponding
+in the test set with the predicted label and corresponding
 probabilities.</li>
 <li><strong>TestFinal_FoldX_XX_TrainingIDs.txt</strong>: List of samples
 used for training in the DL models.</li>
